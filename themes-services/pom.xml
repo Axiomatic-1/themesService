@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.microsevriceslesson</groupId>
-	<artifactId>department-services</artifactId>
+	<artifactId>plate-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>department-services</name>
+	<name>plate-services</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
