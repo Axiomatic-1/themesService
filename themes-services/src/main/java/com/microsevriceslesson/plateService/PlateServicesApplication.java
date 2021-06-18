@@ -1,4 +1,4 @@
-package com.microsevriceslesson.departmentservices;
+package com.microsevriceslesson.plateService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

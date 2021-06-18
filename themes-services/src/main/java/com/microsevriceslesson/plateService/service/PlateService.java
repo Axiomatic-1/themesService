@@ -1,7 +1,7 @@
-package com.microsevriceslesson.departmentservices.service;
+package com.microsevriceslesson.plateService.service;
 
-import com.microsevriceslesson.departmentservices.entity.Plate;
-import com.microsevriceslesson.departmentservices.repository.PlateRepository;
+import com.microsevriceslesson.plateService.entity.Plate;
+import com.microsevriceslesson.plateService.repository.PlateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

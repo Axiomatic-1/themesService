@@ -1,7 +1,7 @@
-package com.microsevriceslesson.departmentservices.controller;
+package com.microsevriceslesson.plateService.controller;
 
-import com.microsevriceslesson.departmentservices.entity.Plate;
-import com.microsevriceslesson.departmentservices.service.PlateService;
+import com.microsevriceslesson.plateService.entity.Plate;
+import com.microsevriceslesson.plateService.service.PlateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

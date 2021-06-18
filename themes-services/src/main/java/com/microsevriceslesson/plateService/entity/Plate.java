@@ -1,6 +1,5 @@
-package com.microsevriceslesson.departmentservices.entity;
+package com.microsevriceslesson.plateService.entity;
 
-import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

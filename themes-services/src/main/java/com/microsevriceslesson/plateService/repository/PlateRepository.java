@@ -1,6 +1,6 @@
-package com.microsevriceslesson.departmentservices.repository;
+package com.microsevriceslesson.plateService.repository;
 
-import com.microsevriceslesson.departmentservices.entity.Plate;
+import com.microsevriceslesson.plateService.entity.Plate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
