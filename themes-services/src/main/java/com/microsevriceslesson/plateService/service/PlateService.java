@@ -2,24 +2,30 @@ package com.microsevriceslesson.plateService.service;
 
 import com.microsevriceslesson.plateService.entity.Plate;
 import com.microsevriceslesson.plateService.repository.PlateRepository;
+import com.microsevriceslesson.plateService.serviceInterfaces.PlateServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
-public class PlateService {
+@Transactional
+public class PlateService implements PlateServiceInter {
 
-    private PlateRepository plateRepository;
+    private final PlateRepository plateRepository;
 
-    @Autowired
+
     public PlateService(PlateRepository plateRepository) {
         this.plateRepository = plateRepository;
     }
 
+    @Override
     public Plate savePlate(Plate plate) {
         return plateRepository.save(plate);
     }
 
-    public Plate plateFindById(Long departmentId) {
-        return plateRepository.findByPlateId(departmentId);
+    @Override
+    public Plate plateFindById(Long plateId) {
+        return plateRepository.findByPlateId(plateId);
     }
 }

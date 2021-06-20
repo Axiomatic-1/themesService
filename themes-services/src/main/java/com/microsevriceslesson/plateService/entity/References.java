@@ -1,6 +1,7 @@
 package com.microsevriceslesson.plateService.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "refers")
+@Builder
 public class References {
 
     @Id
@@ -21,6 +23,12 @@ public class References {
     private String refs;
     @Column(length = 2000)
     private String comments;
+
+
+    public References(String refs, String comments) {
+        this.refs = refs;
+        this.comments = comments;
+    }
 
 //    @ManyToOne(targetEntity = Plate.class)
 //    @JoinColumn(name = "plate_id")
