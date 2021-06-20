@@ -15,7 +15,11 @@ public class ReferencesDto {
     private Long refId;
     private String refs;
     private String comments;
-    private Plate plate;
+    private transient Long plateId;
 
-
+    public ReferencesDto(String refs, String comments, Long plateId) {
+        this.refs = refs;
+        this.comments = comments;
+        this.plateId = plateId;
+    }
 }

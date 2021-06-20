@@ -18,6 +18,10 @@ public class Tags {
     @Column(name = "tag_name")
     private String tagName;
 
+    public Tags(String tagName) {
+        this.tagName = tagName;
+    }
+
 //    @ManyToOne(targetEntity = Plate.class)
 //    @JoinColumn(name = "plate_id")
 //    Plate plate;

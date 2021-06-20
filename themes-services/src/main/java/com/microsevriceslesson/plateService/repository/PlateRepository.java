@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlateRepository extends JpaRepository<Plate, Long> {
 
-    Plate findByPlateId(Long departmentId);
+    Plate findByPlateId(Long plateId);
+
+    Plate save(Plate plate);
 
 }

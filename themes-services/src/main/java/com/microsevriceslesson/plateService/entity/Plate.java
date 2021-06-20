@@ -1,26 +1,33 @@
 package com.microsevriceslesson.plateService.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "departments")
+@Builder
+@Table(name = "plate")
 public class Plate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "department_id")
+    @Column(name = "plate_id")
     private Long plateId;
-    @Column(name = "department_name")
+    @Column(name = "plate_name")
     private String plateName;
-    @Column(name = "adress")
-    private String adress;
-    @Column(name = "department_code")
-    private String departmentCode;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Tags> tag;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<References> references;
+
+    public Plate(String plateName, Set<Tags> tag, Set<References> references) {
+        this.plateName = plateName;
+        this.tag = tag;
+        this.references = references;
+    }
 }
