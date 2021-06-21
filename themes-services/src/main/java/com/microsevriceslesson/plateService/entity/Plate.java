@@ -20,14 +20,11 @@ public class Plate {
     private String plateName;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "tags_in_plate_id")
     private Set<Tags> tag;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "refs_in_plate_id")
     private Set<References> references;
 
-    public Plate(String plateName, Set<Tags> tag, Set<References> references) {
-        this.plateName = plateName;
-        this.tag = tag;
-        this.references = references;
-    }
 }

@@ -38,7 +38,7 @@ public class PlateController {
         plate.setPlateName("Vk-Plate");
         plate.setReferences(ref);
         plate.setTag(tag);
-        log.info("////////////|||||||||||||||HERE!!!!!!!!!!");
+        log.info("Saving test example of Plate");
         plateServiceInter.savePlate(plate);
         log.info("saved " + plate.toString());
         return plate;
@@ -46,7 +46,7 @@ public class PlateController {
 
     @GetMapping("/{id}")
     public Plate findPlateByID(@PathVariable("id") Long plateId) {
-        log.info("INSIDE findDepartmentByID method - plateID: " + plateId);
+        log.info("INSIDE findPlateByID method - plateID: " + plateId);
         return plateServiceInter.plateFindById(plateId);
     }
 
