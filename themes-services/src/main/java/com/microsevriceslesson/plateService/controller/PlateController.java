@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/plates")
 @Slf4j
 public class PlateController {
 
