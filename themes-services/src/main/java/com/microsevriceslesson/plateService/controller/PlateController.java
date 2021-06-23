@@ -3,6 +3,7 @@ package com.microsevriceslesson.plateService.controller;
 import com.microsevriceslesson.plateService.entity.Plate;
 import com.microsevriceslesson.plateService.entity.References;
 import com.microsevriceslesson.plateService.entity.Tags;
+import com.microsevriceslesson.plateService.repository.ProfileRepository;
 import com.microsevriceslesson.plateService.serviceInterfaces.PlateServiceInter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
