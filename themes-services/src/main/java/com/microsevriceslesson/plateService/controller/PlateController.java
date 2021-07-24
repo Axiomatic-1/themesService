@@ -5,6 +5,10 @@ import com.microsevriceslesson.plateService.entity.References;
 import com.microsevriceslesson.plateService.entity.Tags;
 import com.microsevriceslesson.plateService.repository.ProfileRepository;
 import com.microsevriceslesson.plateService.serviceInterfaces.PlateServiceInter;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +26,11 @@ public class PlateController {
 
 
     @PostMapping("/")
+    @ApiOperation(value = "Сохрнение плиты")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
     public Plate savePlate(@RequestBody Plate plate) {
         log.info("INSIDE savePlate method" + plate.toString());
         return plateServiceInter.savePlate(plate);
@@ -29,6 +38,11 @@ public class PlateController {
 
 
     @GetMapping("/example")
+    @ApiOperation(value = "Сохрнение пользователя")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
     public Plate returnPlate() {
         Set<References> ref = new HashSet<>();
         ref.add(new References("vk.com", "social_media"));
@@ -46,7 +60,12 @@ public class PlateController {
     }
 
     @GetMapping("/{id}")
-    public Plate findPlateByID(@PathVariable("id") Long plateId) {
+    @ApiOperation(value = "Получение плиты по ИД")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
+    public Plate findPlateByID(@ApiParam(value = "ID плиты") @PathVariable("id") Long plateId) {
         log.info("INSIDE findPlateByID method - plateID: " + plateId);
         return plateServiceInter.plateFindById(plateId);
     }
