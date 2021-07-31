@@ -1,8 +1,8 @@
 package com.microsevriceslesson.plateService.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 
@@ -15,6 +15,7 @@ public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "tag_name")
     private String tagName;
 
@@ -24,5 +25,6 @@ public class Tags {
 
     @ManyToOne(targetEntity = Plate.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "plate_id")
+    @JsonIgnore
     private Plate plate;
 }

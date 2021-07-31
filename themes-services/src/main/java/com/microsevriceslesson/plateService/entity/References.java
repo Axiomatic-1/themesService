@@ -1,5 +1,6 @@
 package com.microsevriceslesson.plateService.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +33,6 @@ public class References {
 
     @ManyToOne(targetEntity = Plate.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "plate_id")
+    @JsonIgnore
     private Plate plate;
 }

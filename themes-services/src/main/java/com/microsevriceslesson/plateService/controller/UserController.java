@@ -30,9 +30,9 @@ public class UserController {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Error")
     })
-    public User saveUser(@RequestBody User user){
+    public User saveOrUpdateUser(@RequestBody User user){
         log.info("We are saved user :" + user.toString());
-        return userService.saveUser(user);
+        return userService.saveOrUpdate(user);
     }
 
     @GetMapping("/{id}")

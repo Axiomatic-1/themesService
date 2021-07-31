@@ -1,5 +1,6 @@
 package com.microsevriceslesson.plateService.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,13 +23,16 @@ public class Plate implements Serializable {
     private String plateName;
 
     @OneToMany(mappedBy = "plate",orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Tags> tag;
 
     @OneToMany(mappedBy = "plate", orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<References> references;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
 }
