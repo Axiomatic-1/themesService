@@ -3,6 +3,7 @@ package com.microsevriceslesson.plateService.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -10,8 +11,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "plate")
-public class Plate {
+@Table(name = "plates")
+public class Plate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plate_id")
@@ -20,12 +21,14 @@ public class Plate {
     @Column(name = "plate_name")
     private String plateName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tags_in_plate_id")
+    @OneToMany(mappedBy = "plate",orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Tags> tag;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "refs_in_plate_id")
+    @OneToMany(mappedBy = "plate", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<References> references;
+
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

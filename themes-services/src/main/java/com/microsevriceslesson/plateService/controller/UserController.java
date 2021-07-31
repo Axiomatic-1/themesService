@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -35,4 +35,13 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Поиск пользователя по ид")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
+    public User findUserById(@ApiParam(value = "ID плиты") @PathVariable("id") Long userId){
+        return userService.findUserById(userId);
+    }
 }

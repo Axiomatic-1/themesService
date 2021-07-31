@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1627744325675-1
+      id: 1627761312804-1
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -9,15 +9,18 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: platePK
+                    primaryKeyName: platesPK
                   name: plate_id
                   type: BIGINT
               - column:
                   name: plate_name
                   type: VARCHAR(255)
-            tableName: plate
+              - column:
+                  name: user_id
+                  type: BIGINT
+            tableName: plates
   - changeSet:
-      id: 1627744325675-2
+      id: 1627761312804-2
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -40,12 +43,9 @@ databaseChangeLog:
               - column:
                   name: plate_id
                   type: BIGINT
-              - column:
-                  name: refs_in_plate_id
-                  type: BIGINT
             tableName: refers
   - changeSet:
-      id: 1627744325675-3
+      id: 1627761312804-3
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -63,12 +63,9 @@ databaseChangeLog:
               - column:
                   name: plate_id
                   type: BIGINT
-              - column:
-                  name: tags_in_plate_id
-                  type: BIGINT
             tableName: tags
   - changeSet:
-      id: 1627744325675-4
+      id: 1627761312804-4
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -91,7 +88,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: users
   - changeSet:
-      id: 1627744325675-5
+      id: 1627761312804-5
       author: your_liquibase_username (generated)
       changes:
         - addUniqueConstraint:
@@ -99,64 +96,167 @@ databaseChangeLog:
             constraintName: UC_REFERSREFS_COL
             tableName: refers
   - changeSet:
-      id: 1627744325675-6
+      id: 1627761312804-6
       author: your_liquibase_username (generated)
       changes:
         - addForeignKeyConstraint:
-            baseColumnNames: tags_in_plate_id
-            baseTableName: tags
-            constraintName: FK2uhm7uap9pdkajm2h4263jjov
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: plate_id
-            referencedTableName: plate
-  - changeSet:
-      id: 1627744325675-7
-      author: your_liquibase_username (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: refs_in_plate_id
-            baseTableName: refers
-            constraintName: FK2yt4xh2dxjpuaqh6ynr6k0p1d
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: plate_id
-            referencedTableName: plate
-  - changeSet:
-      id: 1627744325675-8
-      author: your_liquibase_username (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: plate_id
-            baseTableName: tags
-            constraintName: FK4psi5q9j1y1p43jl73yjygusk
-            deferrable: false
-            initiallyDeferred: false
-            referencedColumnNames: plate_id
-            referencedTableName: plate
-  - changeSet:
-      id: 1627744325675-9
-      author: your_liquibase_username (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: plate_id
-            baseTableName: plate
-            constraintName: FK588fennafvkcuakaa6kbk0m63
+            baseColumnNames: user_id
+            baseTableName: plates
+            constraintName: FKgy922doqh9dgv88an7uyskh8d
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1627744325675-10
+      id: 1627761312804-7
+      author: your_liquibase_username (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: plate_id
+            baseTableName: tags
+            constraintName: FKielb0smtdccg1e4r8d3675pkf
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: plate_id
+            referencedTableName: plates
+  - changeSet:
+      id: 1627761312804-8
       author: your_liquibase_username (generated)
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: plate_id
             baseTableName: refers
-            constraintName: FKmxmy8d8wwyc1orgsdi3msu0hf
+            constraintName: FKo2okrl16pp4og4ky5t9y0o0dq
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: plate_id
-            referencedTableName: plate
-
-
+            referencedTableName: plates
+  - changeSet:
+      id: 1627761312804-9
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: first_name
+                  value: "admin"
+              - column:
+                  name: last_name
+                  value: "admin"
+              - column:
+                  name: email
+                  value: "admin@server.com"
+  - changeSet:
+      id: 1627761312804-10
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: plates
+            columns:
+              - column:
+                  name: plate_name
+                  value: "Spring"
+              - column:
+                  name: user_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-11
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: plates
+            columns:
+              - column:
+                  name: plate_name
+                  value: "Hibernate"
+              - column:
+                  name: user_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-12
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: tag_name
+                  value: "Java"
+              - column:
+                  name: plate_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-13
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: tag_name
+                  value: "DI"
+              - column:
+                  name: plate_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-14
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: tag_name
+                  value: "ORM"
+              - column:
+                  name: plate_id
+                  value: 2
+  - changeSet:
+      id: 1627761312804-15
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: refers
+            columns:
+              - column:
+                  name: comments
+                  value: "comment"
+              - column:
+                  name: refs
+                  value: "http\\:spring1.link"
+              - column:
+                  name: plate_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-16
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: refers
+            columns:
+              - column:
+                  name: comments
+                  value: "comment"
+              - column:
+                  name: refs
+                  value: "http\\:spring2.link"
+              - column:
+                  name: plate_id
+                  value: 1
+  - changeSet:
+      id: 1627761312804-17
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: refers
+            columns:
+              - column:
+                  name: comments
+                  value: "comment"
+              - column:
+                  name: refs
+                  value: "http\\:hibernate.link"
+              - column:
+                  name: plate_id
+                  value: 2

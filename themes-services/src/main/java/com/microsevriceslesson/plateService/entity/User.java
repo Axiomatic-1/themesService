@@ -24,9 +24,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "plate_id")
+    @OneToMany(targetEntity = Plate.class, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Plate> plates;
-
 }
 

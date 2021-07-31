@@ -30,7 +30,7 @@ public class References {
         this.comments = comments;
     }
 
-    @ManyToOne(targetEntity = Plate.class)
+    @ManyToOne(targetEntity = Plate.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "plate_id")
     private Plate plate;
 }
