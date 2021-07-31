@@ -35,14 +35,4 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "Получаем пользователя по ИД")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Ok"),
-            @ApiResponse(code = 400, message = "Error")
-    })
-    public ResponseTemplateVO getUserWithDepartment(@ApiParam(value = "ID пользователя")@PathVariable("id") Long UserId){
-        log.info("We are in getUserWithDepartment method");
-        return userService.getUserWithPlate(UserId);
-    }
 }

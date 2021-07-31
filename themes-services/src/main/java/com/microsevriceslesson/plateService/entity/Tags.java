@@ -22,7 +22,7 @@ public class Tags {
         this.tagName = tagName;
     }
 
-//    @ManyToOne(targetEntity = Plate.class)
-//    @JoinColumn(name = "plate_id")
-//    Plate plate;
+    @ManyToOne(targetEntity = Plate.class)
+    @JoinColumn(name = "plate_id")
+    Plate plate;
 }

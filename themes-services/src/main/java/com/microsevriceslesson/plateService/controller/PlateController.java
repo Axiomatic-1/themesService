@@ -1,9 +1,7 @@
 package com.microsevriceslesson.plateService.controller;
 
 import com.microsevriceslesson.plateService.entity.Plate;
-import com.microsevriceslesson.plateService.entity.References;
 import com.microsevriceslesson.plateService.entity.Tags;
-import com.microsevriceslesson.plateService.repository.ProfileRepository;
 import com.microsevriceslesson.plateService.serviceInterfaces.PlateServiceInter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,27 +35,27 @@ public class PlateController {
     }
 
 
-    @GetMapping("/example")
-    @ApiOperation(value = "Сохрнение пользователя")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Ok"),
-            @ApiResponse(code = 400, message = "Error")
-    })
-    public Plate returnPlate() {
-        Set<References> ref = new HashSet<>();
-        ref.add(new References("vk.com", "social_media"));
-        ref.add(new References("facebook.com", "social_media2"));
-        Set<Tags> tag = new HashSet<>();
-        tag.add(new Tags("tag"));
-        Plate plate = new Plate();
-        plate.setPlateName("Vk-Plate");
-        plate.setReferences(ref);
-        plate.setTag(tag);
-        log.info("Saving test example of Plate");
-        plateServiceInter.savePlate(plate);
-        log.info("saved " + plate.toString());
-        return plate;
-    }
+//    @GetMapping("/example")
+//    @ApiOperation(value = "Сохрнение пользователя")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Ok"),
+//            @ApiResponse(code = 400, message = "Error")
+//    })
+//    public Plate returnPlate() {
+//        Set<References> ref = new HashSet<>();
+//        ref.add(new References("vk.com", "social_media"));
+//        ref.add(new References("facebook.com", "social_media2"));
+//        Set<Tags> tag = new HashSet<>();
+//        tag.add(new Tags("tag"));
+//        Plate plate = new Plate();
+//        plate.setPlateName("Vk-Plate");
+//        plate.setReferences(ref);
+//        plate.setTag(tag);
+//        log.info("Saving test example of Plate");
+//        plateServiceInter.savePlate(plate);
+//        log.info("saved " + plate.toString());
+//        return plate;
+//    }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Получение плиты по ИД")
