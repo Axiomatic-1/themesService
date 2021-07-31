@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -22,7 +23,10 @@ public class User {
     private String lastName;
     @Column(name = "email")
     private String email;
-    @Column(name = "department_id")
-    private Long plateId;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "plate_id")
+    private Set<Plate> plates;
+
 }
 

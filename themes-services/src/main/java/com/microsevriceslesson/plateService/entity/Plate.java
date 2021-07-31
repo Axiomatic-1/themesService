@@ -16,6 +16,7 @@ public class Plate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "plate_id")
     private Long plateId;
+
     @Column(name = "plate_name")
     private String plateName;
 

@@ -30,7 +30,7 @@ public class References {
         this.comments = comments;
     }
 
-//    @ManyToOne(targetEntity = Plate.class)
-//    @JoinColumn(name = "plate_id")
-//    private Plate plate;
+    @ManyToOne(targetEntity = Plate.class)
+    @JoinColumn(name = "plate_id")
+    private Plate plate;
 }

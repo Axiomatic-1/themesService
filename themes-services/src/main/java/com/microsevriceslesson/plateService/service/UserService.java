@@ -15,27 +15,15 @@ import org.springframework.web.client.RestTemplate;
 public class UserService {
 
     private UserRepository userRepository;
-    private RestTemplate restTemplate;
 
     @Autowired
-    public UserService(UserRepository userRepository, RestTemplate restTemplate) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.restTemplate = restTemplate;
     }
 
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
-    public ResponseTemplateVO getUserWithPlate(Long userId) {
-        log.info("WE ARE IN GET USER WITH DEPARTMENT SERVICE!!!");
-        ResponseTemplateVO vo = new ResponseTemplateVO();
-        User user = userRepository.findByUserId(userId);
-        PlateVO plate =
-                restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/" + user.getPlateId()
-                        , PlateVO.class);
-        vo.setUser(user);
-        vo.setPlate(plate);
-        return vo;
-    }
+
 }

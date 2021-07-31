@@ -1,6 +1,6 @@
 package com.microsevriceslesson.plateService.entity.dto;
 
-import com.microsevriceslesson.plateService.entity.References;
+
 import com.microsevriceslesson.plateService.entity.Tags;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ public class PlateDto {
     private Long plateId;
     private String plateName;
     private Set<Tags> tag;
-    private Set<References> references;
+//    private Set<References> references;
 
     public PlateDto(Long plateId, String plateName) {
         this.plateId = plateId;
