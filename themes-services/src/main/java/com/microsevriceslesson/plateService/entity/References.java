@@ -19,6 +19,7 @@ public class References {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ref_id")
     private Long refId;
     @Column(length = 1500, unique = true, nullable = false)
     private String refs;

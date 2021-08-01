@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class PlateService {
@@ -24,8 +26,9 @@ public class PlateService {
         return repository.save(plate);
     }
 
-
     public Plate findByTagName(String name){
         return repository.findByTagName(name);
     }
+
+    public List<Plate> getAllUserPlates(Long id){return repository.getAllUserPlates(id);}
 }

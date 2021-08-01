@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -57,6 +58,17 @@ public class PlateController {
     public Plate findByTagName(@ApiParam(value = "Имя тэга", required = true) @RequestParam String tagName) {
         log.info("INSIDE findByTagName method - plateID: " + tagName);
         return plateService.findByTagName(tagName);
+    }
+
+    @GetMapping("/all_plates")
+    @ApiOperation(value = "Получение всех плит юзера")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
+    public List<Plate> getAllUserPlates(@ApiParam(value = "ID юзера", required = true) @RequestParam Long userId) {
+        log.info("INSIDE getAllUserPlates method - userId: " + userId);
+        return plateService.getAllUserPlates(userId);
     }
 
 }

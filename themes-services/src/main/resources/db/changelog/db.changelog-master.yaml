@@ -30,7 +30,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     primaryKeyName: refersPK
-                  name: refId
+                  name: ref_id
                   type: BIGINT
               - column:
                   name: comments
