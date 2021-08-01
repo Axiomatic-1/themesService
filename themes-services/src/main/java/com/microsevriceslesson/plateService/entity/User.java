@@ -18,12 +18,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "email")
     private String email;
+
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @OneToMany(targetEntity = Plate.class, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore

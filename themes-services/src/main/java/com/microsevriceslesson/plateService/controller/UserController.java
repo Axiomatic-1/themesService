@@ -1,9 +1,8 @@
 package com.microsevriceslesson.plateService.controller;
 
 
-import com.microsevriceslesson.plateService.VO.ResponseTemplateVO;
 import com.microsevriceslesson.plateService.entity.User;
-import com.microsevriceslesson.plateService.service.UserService;
+import com.microsevriceslesson.plateService.service.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -12,16 +11,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     @PostMapping("/")
@@ -32,7 +33,7 @@ public class UserController {
     })
     public User saveOrUpdateUser(@RequestBody User user){
         log.info("We are saved user :" + user.toString());
-        return userService.saveOrUpdate(user);
+        return userServiceImpl.saveOrUpdate(user);
     }
 
     @GetMapping("/{id}")
@@ -42,6 +43,16 @@ public class UserController {
             @ApiResponse(code = 400, message = "Error")
     })
     public User findUserById(@ApiParam(value = "ID плиты") @PathVariable("id") Long userId){
-        return userService.findUserById(userId);
+        return userServiceImpl.findUserById(userId);
+    }
+
+    @GetMapping("/")
+    @ApiOperation(value = "Получить всен юзеров")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok"),
+            @ApiResponse(code = 400, message = "Error")
+    })
+    public List<User> getAllUsers() {
+        return userServiceImpl.findAllUsers();
     }
 }

@@ -1,31 +1,16 @@
 package com.microsevriceslesson.plateService.service;
 
-
-import com.microsevriceslesson.plateService.VO.PlateVO;
-import com.microsevriceslesson.plateService.VO.ResponseTemplateVO;
 import com.microsevriceslesson.plateService.entity.User;
-import com.microsevriceslesson.plateService.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-@Service
-@Slf4j
-public class UserService {
+import java.util.List;
 
-    private UserRepository userRepository;
+public interface UserService {
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    User saveOrUpdate(User user);
 
-    public User saveOrUpdate(User user) {
-        return userRepository.save(user);
-    }
+    User findUserById(Long id);
 
-    public User findUserById(Long id){return userRepository.findByUserId(id);}
+    User findByEmail(String email);
 
-
+    List<User> findAllUsers();
 }

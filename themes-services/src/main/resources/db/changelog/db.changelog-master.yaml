@@ -1,6 +1,23 @@
 databaseChangeLog:
   - changeSet:
-      id: 1627761312804-1
+      id: 1627812891826-1
+      author: your_liquibase_username (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: RolePK
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  name: role_name
+                  type: VARCHAR(255)
+            tableName: Role
+  - changeSet:
+      id: 1627812891826-2
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -20,7 +37,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: plates
   - changeSet:
-      id: 1627761312804-2
+      id: 1627812891826-3
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -30,7 +47,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     primaryKeyName: refersPK
-                  name: refId
+                  name: ref_id
                   type: BIGINT
               - column:
                   name: comments
@@ -45,7 +62,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: refers
   - changeSet:
-      id: 1627761312804-3
+      id: 1627812891826-4
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -65,7 +82,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: tags
   - changeSet:
-      id: 1627761312804-4
+      id: 1627812891826-5
       author: your_liquibase_username (generated)
       changes:
         - createTable:
@@ -86,9 +103,12 @@ databaseChangeLog:
               - column:
                   name: last_name
                   type: VARCHAR(255)
+              - column:
+                  name: role_id
+                  type: BIGINT
             tableName: users
   - changeSet:
-      id: 1627761312804-5
+      id: 1627812891826-6
       author: your_liquibase_username (generated)
       changes:
         - addUniqueConstraint:
@@ -96,7 +116,19 @@ databaseChangeLog:
             constraintName: UC_REFERSREFS_COL
             tableName: refers
   - changeSet:
-      id: 1627761312804-6
+      id: 1627812891826-7
+      author: your_liquibase_username (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: users
+            constraintName: FKejqbue1tvvj4wdlfs6w0q1py7
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: role_id
+            referencedTableName: Role
+  - changeSet:
+      id: 1627812891826-8
       author: your_liquibase_username (generated)
       changes:
         - addForeignKeyConstraint:
@@ -108,7 +140,7 @@ databaseChangeLog:
             referencedColumnNames: user_id
             referencedTableName: users
   - changeSet:
-      id: 1627761312804-7
+      id: 1627812891826-9
       author: your_liquibase_username (generated)
       changes:
         - addForeignKeyConstraint:
@@ -120,7 +152,7 @@ databaseChangeLog:
             referencedColumnNames: plate_id
             referencedTableName: plates
   - changeSet:
-      id: 1627761312804-8
+      id: 1627812891826-10
       author: your_liquibase_username (generated)
       changes:
         - addForeignKeyConstraint:
@@ -260,3 +292,16 @@ databaseChangeLog:
               - column:
                   name: plate_id
                   value: 2
+  - changeSet:
+      id: 1627761312804-18
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: Role
+            columns:
+              - column:
+                  name: role_name
+                  value: "ROLE_ADMIN"
+              - column:
+                  name: role_id
+                  value: 1
