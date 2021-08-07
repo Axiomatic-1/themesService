@@ -1,43 +1,78 @@
-#server:
-#  port: 8080
-#
-#spring:
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://localhost:5432/postgres?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC
-#    username: postgres
-#    password: password
-#
-#  jpa:
-#    database: postgresql
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#        jdbc:
-#          lob:
-#            non_contextual_creation: true
-#    hibernate:
-#      ddl-auto: none
-#
-#  liquibase:
-#    enabled: true
-#
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          github:
-#            clientId: 6ed45789fd43af13a8b0
-#            clientSecret: 9da851020b32bbc3ce27ab9bc083d1d081e1a7f8
+server:
+  port: 8083
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC
+    username: postgres
+    password: password
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 6ed45789fd43af13a8b0
+            clientSecret: 9da851020b32bbc3ce27ab9bc083d1d081e1a7f8
+            redirectUri: http://localhost:8083/oauth2/callback/github
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 185655893597181
+            clientSecret: 6a4b535afde8ba2ecc6c8c48b3701fae
+            redirectUri: http://localhost:8083/oauth2/callback/facebook # Note that facebook now mandates the use of https redirect URIs, so make sure your app supports https in production
+            scope:
+              - email
+              - public_profile
+          google:
+            clientId: 611949399690-imehq68b15gc35s2e5479fmjtnkq3ju6.apps.googleusercontent.com
+            clientSecret: MYkAGrm69_sxp2F_67sOFddT
+            redirectUri: http://localhost:8083/oauth2/callback/google
+            scope:
+              - email
+              - profile
+#        provider:
+#          facebook:
+#            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+#            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+#            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+
 #      resourceserver:
 #        jwt:
 #          jwk-set-uri: https://api.github.com/applications/6ed45789fd43af13a8b0/tokens
-#
-#
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security: debug
+
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

@@ -2,6 +2,10 @@ package com.microsevriceslesson.plateService.controller;
 
 
 import com.microsevriceslesson.plateService.entity.User;
+import com.microsevriceslesson.plateService.repository.UserRepository;
+import com.microsevriceslesson.plateService.security.CurrentUser;
+import com.microsevriceslesson.plateService.exception.ResourceNotFoundException;
+import com.microsevriceslesson.plateService.security.UserPrincipal;
 import com.microsevriceslesson.plateService.service.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -9,6 +13,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +28,16 @@ public class UserController {
     @Autowired
     public UserController(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
+    }
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
     @PostMapping("/")
@@ -55,4 +70,6 @@ public class UserController {
     public List<User> getAllUsers() {
         return userServiceImpl.findAllUsers();
     }
+
+
 }

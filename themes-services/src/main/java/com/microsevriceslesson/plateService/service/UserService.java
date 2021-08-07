@@ -3,6 +3,7 @@ package com.microsevriceslesson.plateService.service;
 import com.microsevriceslesson.plateService.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -10,7 +11,7 @@ public interface UserService {
 
     User findUserById(Long id);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     List<User> findAllUsers();
 }
