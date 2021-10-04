@@ -9,13 +9,13 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: RolePK
+                    primaryKeyName: rolePK
                   name: role_id
                   type: BIGINT
               - column:
                   name: role_name
                   type: VARCHAR(255)
-            tableName: Role
+            tableName: roles
   - changeSet:
       id: 1627812891826-2
       author: your_liquibase_username (generated)
@@ -104,6 +104,27 @@ databaseChangeLog:
                   name: last_name
                   type: VARCHAR(255)
               - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: display_name
+                  type: VARCHAR(255)
+              - column:
+                  name: provider_user_id
+                  type: VARCHAR(255)
+              - column:
+                  name: provider
+                  type: VARCHAR(255)
+              - column:
+                  name: enabled
+                  type: BOOLEAN
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+              - column:
+                  name: last_modified_date
+                  type: TIMESTAMP
+              - column:
                   name: role_id
                   type: BIGINT
             tableName: users
@@ -126,7 +147,7 @@ databaseChangeLog:
             deferrable: false
             initiallyDeferred: false
             referencedColumnNames: role_id
-            referencedTableName: Role
+            referencedTableName: roles
   - changeSet:
       id: 1627812891826-8
       author: your_liquibase_username (generated)
@@ -297,7 +318,7 @@ databaseChangeLog:
       author: your_liquibase_username (generated)
       changes:
         - insert:
-            tableName: Role
+            tableName: roles
             columns:
               - column:
                   name: role_name

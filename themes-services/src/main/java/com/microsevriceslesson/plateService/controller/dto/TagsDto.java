@@ -1,4 +1,4 @@
-package com.microsevriceslesson.plateService.entity.dto;
+package com.microsevriceslesson.plateService.controller.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

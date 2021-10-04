@@ -1,12 +1,13 @@
 package com.microsevriceslesson.plateService.controller;
 
-import com.microsevriceslesson.plateService.entity.Plate;
 import com.microsevriceslesson.plateService.entity.References;
-import com.microsevriceslesson.plateService.service.RefsService;
+import com.microsevriceslesson.plateService.service.RefsServiceImpl;
+import com.microsevriceslesson.plateService.service.interfaces.RefsService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/refs")
 @Slf4j
+@RequiredArgsConstructor
 public class RefsController {
 
     private final RefsService refsService;
-
-    public RefsController(RefsService refsService) {
-        this.refsService = refsService;
-    }
 
     @PostMapping("/")
     @ApiOperation(value = "Сохрнение или редактирование ссылки")
