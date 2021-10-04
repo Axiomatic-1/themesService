@@ -1,11 +1,15 @@
 package com.microsevriceslesson.plateService.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +17,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Table(name = "users")
+@Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -28,12 +34,45 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "DISPLAY_NAME")
+    private String displayName;
+
+    @Column(name = "PROVIDER_USER_ID")
+    private String providerUserId;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    @Column(name = "created_date")
+    private LocalDate cratedDate;
+
+    @Column(name = "Last_modified_date")
+    private LocalDate lastModifiedDate;
+
+    @Column(name = "provider")
+    private String provider;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    private Role role;
+    private Role userRole;
 
     @OneToMany(targetEntity = Plate.class, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     private Set<Plate> plates;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", userRole=" + userRole +
+                '}';
+    }
 }
 

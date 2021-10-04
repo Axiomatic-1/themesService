@@ -1,4 +1,4 @@
-package com.microsevriceslesson.plateService.entity.dto;
+package com.microsevriceslesson.plateService.controller.dto;
 
 
 import com.microsevriceslesson.plateService.entity.Tags;

@@ -2,24 +2,23 @@ package com.microsevriceslesson.plateService.controller;
 
 
 import com.microsevriceslesson.plateService.entity.Tags;
-import com.microsevriceslesson.plateService.service.TagService;
+import com.microsevriceslesson.plateService.service.TagServiceImpl;
+import com.microsevriceslesson.plateService.service.interfaces.TagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tags")
 @Slf4j
+@RequiredArgsConstructor
 public class TagController {
 
     private final TagService tagService;
-
-    public TagController(TagService tagService) {
-        this.tagService = tagService;
-    }
 
     @PostMapping("/")
     @ApiOperation(value = "Сохрнение или редактирование тэга")

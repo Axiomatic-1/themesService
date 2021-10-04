@@ -1,31 +1,24 @@
 package com.microsevriceslesson.plateService.controller;
 
 import com.microsevriceslesson.plateService.entity.Plate;
-import com.microsevriceslesson.plateService.entity.Tags;
-import com.microsevriceslesson.plateService.repository.PlateRepository;
-import com.microsevriceslesson.plateService.service.PlateService;
+import com.microsevriceslesson.plateService.service.PlateServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/plates")
 @Slf4j
+@RequiredArgsConstructor
 public class PlateController {
 
-     private final PlateService plateService;
-
-    public PlateController(PlateService plateService) {
-        this.plateService = plateService;
-    }
+     private final PlateServiceImpl plateService;
 
     @PostMapping("/")
     @ApiOperation(value = "Сохрнение или редактирование плиты")

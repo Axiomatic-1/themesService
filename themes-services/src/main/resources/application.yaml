@@ -1,43 +1,49 @@
-#server:
-#  port: 8080
-#
-#spring:
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://localhost:5432/postgres?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC
-#    username: postgres
-#    password: password
-#
-#  jpa:
-#    database: postgresql
-#    database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#        jdbc:
-#          lob:
-#            non_contextual_creation: true
-#    hibernate:
-#      ddl-auto: none
-#
-#  liquibase:
-#    enabled: true
-#
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          github:
-#            clientId: 6ed45789fd43af13a8b0
-#            clientSecret: 9da851020b32bbc3ce27ab9bc083d1d081e1a7f8
-#      resourceserver:
-#        jwt:
-#          jwk-set-uri: https://api.github.com/applications/6ed45789fd43af13a8b0/tokens
-#
-#
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security: debug
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC
+    username: postgres
+    password: password
+
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
+
+  liquibase:
+    enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 6ed45789fd43af13a8b0
+            clientSecret: 9da851020b32bbc3ce27ab9bc083d1d081e1a7f8
+          google:
+            clientId: 611949399690-imehq68b15gc35s2e5479fmjtnkq3ju6.apps.googleusercontent.com
+            clientSecret: MYkAGrm69_sxp2F_67sOFddT
+
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+  oauth2:
+    authorizedRedirectUri: http://localhost:4200/oauth2/redirect
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
