@@ -1,14 +1,14 @@
 package com.microsevriceslesson.plateService.repository;
 
-import com.microsevriceslesson.plateService.entity.Tags;
+import com.microsevriceslesson.plateService.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface TagRepository extends JpaRepository<Tags, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
 
-    Tags findByTagName(String name);
+    Tag findByTagName(String name);
 
 
 }

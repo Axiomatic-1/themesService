@@ -28,9 +28,7 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-
     private final UserService userService;
-
     private final TokenProvider tokenProvider;
 
     @PostMapping("/signin")
@@ -38,8 +36,7 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication);
-        LocalUser localUser = (LocalUser) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, GeneralUtils.buildUserInfo(localUser)));
+        return ResponseEntity.ok(jwt);
     }
 
     @PostMapping("/signup")

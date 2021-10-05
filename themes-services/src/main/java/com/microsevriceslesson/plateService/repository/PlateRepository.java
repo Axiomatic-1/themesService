@@ -17,7 +17,7 @@ public interface PlateRepository extends JpaRepository<Plate, Long> {
     Plate save(Plate plate);
 
     @Query(value = "select p from Plate p " +
-            "join Tags t " +
+            "join Tag t " +
             "on p.plateId=t.id " +
             "where t.tagName =:tagName")
     Plate findByTagName(@Param("tagName") String tagName);

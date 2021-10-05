@@ -1,6 +1,8 @@
 package com.microsevriceslesson.plateService.controller;
 
+import com.microsevriceslesson.plateService.controller.dto.PlateDto;
 import com.microsevriceslesson.plateService.entity.Plate;
+import com.microsevriceslesson.plateService.mapper.PlateMapper;
 import com.microsevriceslesson.plateService.service.PlateServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -8,9 +10,11 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/plates")
@@ -18,50 +22,60 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlateController {
 
-     private final PlateServiceImpl plateService;
+    private final PlateServiceImpl plateService;
+    private final PlateMapper plateMapper;
 
     @PostMapping("/")
-    @ApiOperation(value = "Сохрнение или редактирование плиты")
+    @ApiOperation(value = "Create plate")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Error")
     })
-    public Plate saveOrUpdatePlate(@RequestBody Plate plate) {
+    public ResponseEntity<PlateDto> createPlate(@RequestBody Plate plate) {
         log.info("INSIDE savePlate method" + plate.toString());
-        return plateService.saveOrUpdate(plate);
+        Plate createdPlate = plateService.saveOrUpdate(plate);
+        return ResponseEntity.ok(plateMapper.toDto(createdPlate));
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Получение плиты по ИД")
+    @ApiOperation(value = "Get plate by id")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Error")
     })
-    public Plate findPlateByID(@ApiParam(value = "ID плиты") @PathVariable("id") Long plateId) {
+    public ResponseEntity<PlateDto> getPlateById(@ApiParam(value = "Plate id")
+                                                  @PathVariable("id") Long plateId) {
         log.info("INSIDE findPlateByID method - plateID: " + plateId);
-        return plateService.findByPlateId(plateId);
+        Plate plate = plateService.findByPlateId(plateId);
+        return ResponseEntity.ok(plateMapper.toDto(plate));
     }
 
     @GetMapping("/")
-    @ApiOperation(value = "Получение плиты по тэгу")
+    @ApiOperation(value = "Get plate by tag")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Error")
     })
-    public Plate findByTagName(@ApiParam(value = "Имя тэга", required = true) @RequestParam String tagName) {
+    public ResponseEntity<PlateDto> getPlateByTagName(@ApiParam(value = "Tag name", required = true)
+                                                  @RequestParam String tagName) {
         log.info("INSIDE findByTagName method - plateID: " + tagName);
-        return plateService.findByTagName(tagName);
+        Plate plate = plateService.findByTagName(tagName);
+        return ResponseEntity.ok(plateMapper.toDto(plate));
     }
 
-    @GetMapping("/all_plates")
-    @ApiOperation(value = "Получение всех плит юзера")
+    @GetMapping("/all")
+    @ApiOperation(value = "Get all user's plates")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Error")
     })
-    public List<Plate> getAllUserPlates(@ApiParam(value = "ID юзера", required = true) @RequestParam Long userId) {
+    public ResponseEntity<List<PlateDto>> getAllPlatesByUserId(@ApiParam(value = "User id", required = true)
+                                                           @RequestParam Long userId) {
         log.info("INSIDE getAllUserPlates method - userId: " + userId);
-        return plateService.getAllUserPlates(userId);
+        List<Plate> plateList = plateService.getAllUserPlates(userId);
+        return ResponseEntity.ok(plateList.stream()
+                .map(plateMapper::toDto)
+                .collect(Collectors.toList()));
     }
 
 }

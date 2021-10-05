@@ -24,11 +24,11 @@ public class Plate implements Serializable {
 
     @OneToMany(mappedBy = "plate",orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Tags> tag;
+    private Set<Tag> tag;
 
     @OneToMany(mappedBy = "plate", orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<References> references;
+    private Set<Reference> references;
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

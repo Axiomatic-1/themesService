@@ -36,7 +36,6 @@ public class TokenProvider {
 
     public Long getUserIdFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(token).getBody();
-
         return Long.parseLong(claims.getSubject());
     }
 

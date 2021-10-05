@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TagsDto {
+public class TagDto {
     private Long id;
     private String tagName;
 }

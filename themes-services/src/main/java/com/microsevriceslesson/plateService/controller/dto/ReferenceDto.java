@@ -11,15 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReferencesDto {
+public class ReferenceDto {
     private Long refId;
     private String refs;
     private String comments;
-    private transient Long plateId;
-
-    public ReferencesDto(String refs, String comments, Long plateId) {
-        this.refs = refs;
-        this.comments = comments;
-        this.plateId = plateId;
-    }
 }

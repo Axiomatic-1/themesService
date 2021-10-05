@@ -1,6 +1,6 @@
 package com.microsevriceslesson.plateService.service;
 
-import com.microsevriceslesson.plateService.entity.Tags;
+import com.microsevriceslesson.plateService.entity.Tag;
 import com.microsevriceslesson.plateService.repository.TagRepository;
 import com.microsevriceslesson.plateService.service.interfaces.TagService;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ public class TagServiceImpl implements TagService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Tags findTagById(String tagName){
+    public Tag findTagById(String tagName){
         return tagRepository.findByTagName(tagName);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Tags saveOrUpdate(Tags tags){
-        return tagRepository.save(tags);
+    public Tag saveOrUpdate(Tag tag){
+        return tagRepository.save(tag);
     }
 }

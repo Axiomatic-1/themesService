@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "refers")
 @Builder
-public class References {
+public class Reference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class References {
     private String comments;
 
 
-    public References(String refs, String comments) {
+    public Reference(String refs, String comments) {
         this.refs = refs;
         this.comments = comments;
     }

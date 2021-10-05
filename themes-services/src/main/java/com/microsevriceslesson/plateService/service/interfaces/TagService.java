@@ -1,8 +1,8 @@
 package com.microsevriceslesson.plateService.service.interfaces;
 
-import com.microsevriceslesson.plateService.entity.Tags;
+import com.microsevriceslesson.plateService.entity.Tag;
 
 public interface TagService {
-    Tags findTagById(String tagName);
-    Tags saveOrUpdate(Tags tags);
+    Tag findTagById(String tagName);
+    Tag saveOrUpdate(Tag tag);
 }

@@ -1,70 +1,41 @@
 package com.microsevriceslesson.plateService.security.oauth2.user;
 
-import com.microsevriceslesson.plateService.util.GeneralUtils;
+import com.microsevriceslesson.plateService.entity.Role;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class LocalUser extends User implements OAuth2User, OidcUser {
+@Setter
+@Builder
+public class LocalUser implements UserDetails, OAuth2User, OidcUser {
 
-    private final OidcIdToken idToken;
-    private final OidcUserInfo userInfo;
+    private OidcIdToken idToken;
+    private OidcUserInfo userInfo;
     private Map<String, Object> attributes;
     private com.microsevriceslesson.plateService.entity.User user;
+    private Role role;
+    private String username;
+    private String password;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
 
-    public LocalUser(String userID,
-                     String password,
-                     boolean enabled,
-                     boolean accountNonExpired,
-                     boolean credentialsNonExpired,
-                     boolean accountNonLocked,
-                     Collection<? extends GrantedAuthority> authorities,
-                     com.microsevriceslesson.plateService.entity.User user) {
-        this(userID, password, enabled, accountNonExpired, credentialsNonExpired,
-                accountNonLocked, authorities, user, null, null);
-    }
 
-    public LocalUser(String userID,
-                     String password,
-                     boolean enabled,
-                     boolean accountNonExpired,
-                     boolean credentialsNonExpired,
-                     boolean accountNonLocked,
-                     Collection<? extends GrantedAuthority> authorities,
-                     com.microsevriceslesson.plateService.entity.User user,
-                     OidcIdToken idToken,
-                     OidcUserInfo userInfo) {
-        super(userID, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-        this.user = user;
-        this.idToken = idToken;
-        this.userInfo = userInfo;
-    }
-
-    public static LocalUser create(com.microsevriceslesson.plateService.entity.User user,
-                                   Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo) {
-        LocalUser localUser = new LocalUser(user.getEmail(), user.getPassword(), user.isEnabled(),
-                true, true, true,
-                GeneralUtils.buildSimpleGrantedAuthorities(Set.of(user.getUserRole())),
-                user, idToken, userInfo);
-
-        localUser.setAttributes(attributes);
-
-        return localUser;
-    }
-
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
+//    public void setAttributes(Map<String, Object> attributes) {
+//        this.attributes = attributes;
+//    }
 
     @Override
     public String getName() {
@@ -93,5 +64,40 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
 
     public com.microsevriceslesson.plateService.entity.User getUser() {
         return user;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Set.of(new SimpleGrantedAuthority(role.getName()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 }

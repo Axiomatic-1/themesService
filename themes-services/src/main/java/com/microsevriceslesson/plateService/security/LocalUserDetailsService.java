@@ -7,11 +7,13 @@ import com.microsevriceslesson.plateService.exception.ResourceNotFoundException;
 import com.microsevriceslesson.plateService.service.interfaces.UserService;
 import com.microsevriceslesson.plateService.util.GeneralUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service("localUserDetailsService")
@@ -41,12 +43,15 @@ public class LocalUserDetailsService implements UserDetailsService {
     }
 
     private LocalUser createLocalUser(User user) {
-        return new LocalUser(user.getEmail(),
-                user.getPassword(),
-                true,
-                true,
-                true,
-                true,
-                GeneralUtils.buildSimpleGrantedAuthorities(Set.of(user.getUserRole())), user);
+        return LocalUser.builder()
+                .username(user.getEmail())
+                .password(user.getPassword())
+                .isAccountNonExpired(true)
+                .isAccountNonLocked(true)
+                .isCredentialsNonExpired(true)
+                .isEnabled(true)
+                .role(user.getUserRole())
+                .user(user)
+                .build();
     }
 }

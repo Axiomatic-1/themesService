@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tags")
+@Table(name = "tag")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tags {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +19,7 @@ public class Tags {
     @Column(name = "tag_name")
     private String tagName;
 
-    public Tags(String tagName) {
+    public Tag(String tagName) {
         this.tagName = tagName;
     }
 
