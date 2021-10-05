@@ -46,7 +46,7 @@ public class ReferenceController {
     public ResponseEntity<ReferenceDto> getReferenceById(@ApiParam(value = "Reference id")
                                       @PathVariable("id") Long refId) {
         log.info("INSIDE findPlateByID method - plateID: " + refId);
-        Reference reference = referenceService.findByRefId(refId);
+        Reference reference = referenceService.getById(refId);
         return ResponseEntity.ok(referenceMapper.toDto(reference));
     }
 
@@ -59,7 +59,7 @@ public class ReferenceController {
     public ResponseEntity<List<ReferenceDto>> getAllReferencesByPlateId(@ApiParam(value = "Plate id", required = true)
                                                      @RequestParam Long plateId) {
         log.info("INSIDE findByTagName method - plateID: " + plateId);
-        List<Reference> referenceList = referenceService.findByPlatePlateId(plateId);
+        List<Reference> referenceList = referenceService.getAllByPlateId(plateId);
         return ResponseEntity.ok(referenceList.stream()
                 .map(referenceMapper::toDto)
                 .collect(Collectors.toList()));

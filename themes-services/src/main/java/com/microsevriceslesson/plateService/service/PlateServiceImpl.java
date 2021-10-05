@@ -43,5 +43,5 @@ public class PlateServiceImpl implements PlateService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public List<Plate> getAllUserPlatesByUserId(Long id){return repository.getAllUserPlates(id);}
+    public List<Plate> getAllUserPlatesByUserId(Long id){return repository.findAllUserPlates(id);}
 }

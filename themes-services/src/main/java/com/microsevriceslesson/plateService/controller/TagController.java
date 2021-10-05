@@ -43,7 +43,7 @@ public class TagController {
     })
     public ResponseEntity<TagDto> getTagByName(@ApiParam(value = "Tag anme") @RequestParam("name") String name) {
         log.info("INSIDE findTagByID method - tagId: " + name);
-        Tag tag = tagService.findTagById(name);
+        Tag tag = tagService.getByName(name);
         return ResponseEntity.ok(tagMapper.toDto(tag));
     }
 }

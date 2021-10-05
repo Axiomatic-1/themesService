@@ -35,7 +35,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "Error")
     })
     public ResponseEntity<UserDto> getUserById(@ApiParam(value = "ID плиты") @PathVariable("id") Long userId){
-        User user = userService.findUserById(userId);
+        User user = userService.getById(userId);
         return ResponseEntity.ok(userMapper.toDto(user));
     }
 
@@ -46,7 +46,7 @@ public class UserController {
             @ApiResponse(code = 400, message = "Error")
     })
     public List<UserDto> getAllUsers() {
-        List<User> userList = userService.findAllUsers();
+        List<User> userList = userService.getAllUsers();
         return userList.stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());

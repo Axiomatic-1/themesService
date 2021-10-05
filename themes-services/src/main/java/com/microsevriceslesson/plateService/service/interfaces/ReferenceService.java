@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReferenceService {
     Reference getById(Long id);
-    List<Reference> getByPlateId(Long plateId);
+    List<Reference> getAllByPlateId(Long plateId);
     Reference saveOrUpdate(Reference reference);
 }

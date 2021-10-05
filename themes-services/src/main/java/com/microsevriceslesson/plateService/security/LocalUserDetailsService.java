@@ -26,7 +26,7 @@ public class LocalUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public LocalUser loadUserByUsername(final String email) throws UsernameNotFoundException {
-        User user = userService.findByEmail(email);
+        User user = userService.getByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("User " + email + " was not found in the database");
         }

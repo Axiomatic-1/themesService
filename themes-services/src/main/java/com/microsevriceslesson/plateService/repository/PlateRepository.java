@@ -25,5 +25,5 @@ public interface PlateRepository extends JpaRepository<Plate, Long> {
     @Query(value = "select p from Plate p " +
             "join User u on u.userId = p.user.userId " +
             "where u.userId =:userId" )
-    List<Plate> getAllUserPlates(@Param("userId") Long userId);
+    List<Plate> findAllUserPlates(@Param("userId") Long userId);
 }

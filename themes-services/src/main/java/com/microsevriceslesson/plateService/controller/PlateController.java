@@ -46,7 +46,7 @@ public class PlateController {
     public ResponseEntity<PlateDto> getPlateById(@ApiParam(value = "Plate id")
                                                   @PathVariable("id") Long plateId) {
         log.info("INSIDE findPlateByID method - plateID: " + plateId);
-        Plate plate = plateService.findByPlateId(plateId);
+        Plate plate = plateService.getById(plateId);
         return ResponseEntity.ok(plateMapper.toDto(plate));
     }
 
@@ -59,7 +59,7 @@ public class PlateController {
     public ResponseEntity<PlateDto> getPlateByTagName(@ApiParam(value = "Tag name", required = true)
                                                   @RequestParam String tagName) {
         log.info("INSIDE findByTagName method - plateID: " + tagName);
-        Plate plate = plateService.findByTagName(tagName);
+        Plate plate = plateService.getByTagName(tagName);
         return ResponseEntity.ok(plateMapper.toDto(plate));
     }
 
@@ -72,7 +72,7 @@ public class PlateController {
     public ResponseEntity<List<PlateDto>> getAllPlatesByUserId(@ApiParam(value = "User id", required = true)
                                                            @RequestParam Long userId) {
         log.info("INSIDE getAllUserPlates method - userId: " + userId);
-        List<Plate> plateList = plateService.getAllUserPlates(userId);
+        List<Plate> plateList = plateService.getAllUserPlatesByUserId(userId);
         return ResponseEntity.ok(plateList.stream()
                 .map(plateMapper::toDto)
                 .collect(Collectors.toList()));

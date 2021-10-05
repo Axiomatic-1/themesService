@@ -28,7 +28,7 @@ public class ReferenceServiceImpl implements ReferenceService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public List<Reference> getByPlateId(Long plateId){
+    public List<Reference> getAllByPlateId(Long plateId){
         return referenceRepository.findByPlatePlateId(plateId);
     }
 
