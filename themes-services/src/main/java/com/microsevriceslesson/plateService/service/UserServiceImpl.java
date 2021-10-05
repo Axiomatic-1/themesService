@@ -37,13 +37,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
-        if (signUpRequest.getUserID() != null && userRepository.existsById(signUpRequest.getUserID())) {
-            throw new UserAlreadyExistAuthenticationException("User with User id " + signUpRequest.getUserID() + " already exist");
-        } else if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new UserAlreadyExistAuthenticationException("User with email id " + signUpRequest.getEmail() + " already exist");
         }
         User newUser = User.builder()
-                .userId(signUpRequest.getUserID())
                 .providerUserId(signUpRequest.getProviderUserId())
                 .displayName(signUpRequest.getDisplayName())
                 .build();
@@ -69,20 +66,20 @@ public class UserServiceImpl implements UserService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public User findUserById(Long id){
+    public User getById(Long id){
         return userRepository.findByUserId(id);
     }
 
     @Transactional
     @Override
-    public User findByEmail(String email) {
+    public User getByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public List<User> findAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -96,8 +93,8 @@ public class UserServiceImpl implements UserService {
         } else if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
-        SignUpRequest userDetails = toUserRegistrationObject(registrationId, oAuth2UserInfo);
-        User user = findByEmail(oAuth2UserInfo.getEmail());
+        SignUpRequest signUpRequest = toUserRegistrationObject(registrationId, oAuth2UserInfo);
+        User user = getByEmail(oAuth2UserInfo.getEmail());
         if (user != null) {
             if (!user.getDisplayName().equals(registrationId) && !user.getDisplayName().equals(SocialProvider.LOCAL.getProviderType())) {
                 throw new OAuth2AuthenticationProcessingException(
@@ -105,7 +102,7 @@ public class UserServiceImpl implements UserService {
             }
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {
-            user = registerNewUser(userDetails);
+            user = registerNewUser(signUpRequest);
         }
 
         return LocalUser.builder()

@@ -16,11 +16,11 @@ public interface UserService {
 
     User update(User user);
 
-    User findUserById(Long id);
+    User getById(Long id);
 
-    User findByEmail(String email);
+    User getByEmail(String email);
 
-    List<User> findAllUsers();
+    List<User> getAllUsers();
 
     LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
 }

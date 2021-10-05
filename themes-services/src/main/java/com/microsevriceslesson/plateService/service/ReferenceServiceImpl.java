@@ -1,8 +1,8 @@
 package com.microsevriceslesson.plateService.service;
 
 import com.microsevriceslesson.plateService.entity.Reference;
-import com.microsevriceslesson.plateService.repository.RefsRepository;
-import com.microsevriceslesson.plateService.service.interfaces.RefsService;
+import com.microsevriceslesson.plateService.repository.ReferenceRepository;
+import com.microsevriceslesson.plateService.service.interfaces.ReferenceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.annotation.Secured;
@@ -14,28 +14,28 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class RefsServiceImpl implements RefsService {
+public class ReferenceServiceImpl implements ReferenceService {
 
-    private final RefsRepository refsRepository;
+    private final ReferenceRepository referenceRepository;
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Reference findByRefId(Long id){
-        return refsRepository.findByRefId(id);
+    public Reference getById(Long id){
+        return referenceRepository.findByRefId(id);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public List<Reference> findByPlatePlateId(Long plateId){
-        return refsRepository.findByPlatePlateId(plateId);
+    public List<Reference> getByPlateId(Long plateId){
+        return referenceRepository.findByPlatePlateId(plateId);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
     public Reference saveOrUpdate(Reference reference) {
-        return refsRepository.save(reference);
+        return referenceRepository.save(reference);
     }
 }

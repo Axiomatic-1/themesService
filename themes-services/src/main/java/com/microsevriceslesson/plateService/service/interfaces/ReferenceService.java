@@ -4,8 +4,8 @@ import com.microsevriceslesson.plateService.entity.Reference;
 
 import java.util.List;
 
-public interface RefsService {
-    Reference findByRefId(Long id);
-    List<Reference> findByPlatePlateId(Long plateId);
+public interface ReferenceService {
+    Reference getById(Long id);
+    List<Reference> getByPlateId(Long plateId);
     Reference saveOrUpdate(Reference reference);
 }

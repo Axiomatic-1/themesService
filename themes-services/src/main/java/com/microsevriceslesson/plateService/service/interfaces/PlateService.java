@@ -5,8 +5,8 @@ import com.microsevriceslesson.plateService.entity.Plate;
 import java.util.List;
 
 public interface PlateService {
-    Plate findByPlateId(Long plateId);
+    Plate getById(Long plateId);
     Plate saveOrUpdate(Plate plate);
-    Plate findByTagName(String name);
-    List<Plate> getAllUserPlates(Long id);
+    Plate getByTagName(String name);
+    List<Plate> getAllUserPlatesByUserId(Long id);
 }

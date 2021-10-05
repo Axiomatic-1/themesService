@@ -13,8 +13,6 @@ import javax.validation.constraints.Size;
 @Builder
 public class SignUpRequest {
 
-    private Long userID;
-
     private String providerUserId;
 
     @NotEmpty

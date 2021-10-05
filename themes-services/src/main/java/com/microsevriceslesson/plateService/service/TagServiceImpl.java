@@ -20,7 +20,7 @@ public class TagServiceImpl implements TagService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Tag findTagById(String tagName){
+    public Tag getByName(String tagName){
         return tagRepository.findByTagName(tagName);
     }
 

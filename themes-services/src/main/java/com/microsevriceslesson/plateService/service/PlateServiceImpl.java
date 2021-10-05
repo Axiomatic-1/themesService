@@ -22,7 +22,7 @@ public class PlateServiceImpl implements PlateService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Plate findByPlateId(Long plateId){
+    public Plate getById(Long plateId){
         return repository.findByPlateId(plateId);
     }
 
@@ -36,12 +36,12 @@ public class PlateServiceImpl implements PlateService {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public Plate findByTagName(String name){
+    public Plate getByTagName(String name){
         return repository.findByTagName(name);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @Transactional
     @Override
-    public List<Plate> getAllUserPlates(Long id){return repository.getAllUserPlates(id);}
+    public List<Plate> getAllUserPlatesByUserId(Long id){return repository.getAllUserPlates(id);}
 }

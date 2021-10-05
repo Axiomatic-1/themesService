@@ -3,7 +3,7 @@ package com.microsevriceslesson.plateService.controller;
 import com.microsevriceslesson.plateService.controller.dto.ReferenceDto;
 import com.microsevriceslesson.plateService.entity.Reference;
 import com.microsevriceslesson.plateService.mapper.ReferenceMapper;
-import com.microsevriceslesson.plateService.service.interfaces.RefsService;
+import com.microsevriceslesson.plateService.service.interfaces.ReferenceService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReferenceController {
 
-    private final RefsService refsService;
+    private final ReferenceService referenceService;
     private final ReferenceMapper referenceMapper;
 
     @PostMapping("/")
@@ -33,7 +33,7 @@ public class ReferenceController {
     })
     public ResponseEntity<ReferenceDto> createReference(@RequestBody Reference reference) {
         log.info("INSIDE savePlate method" + reference.toString());
-        Reference createdReference = refsService.saveOrUpdate(reference);
+        Reference createdReference = referenceService.saveOrUpdate(reference);
         return ResponseEntity.ok(referenceMapper.toDto(createdReference));
     }
 
@@ -46,7 +46,7 @@ public class ReferenceController {
     public ResponseEntity<ReferenceDto> getReferenceById(@ApiParam(value = "Reference id")
                                       @PathVariable("id") Long refId) {
         log.info("INSIDE findPlateByID method - plateID: " + refId);
-        Reference reference = refsService.findByRefId(refId);
+        Reference reference = referenceService.findByRefId(refId);
         return ResponseEntity.ok(referenceMapper.toDto(reference));
     }
 
@@ -59,7 +59,7 @@ public class ReferenceController {
     public ResponseEntity<List<ReferenceDto>> getAllReferencesByPlateId(@ApiParam(value = "Plate id", required = true)
                                                      @RequestParam Long plateId) {
         log.info("INSIDE findByTagName method - plateID: " + plateId);
-        List<Reference> referenceList = refsService.findByPlatePlateId(plateId);
+        List<Reference> referenceList = referenceService.findByPlatePlateId(plateId);
         return ResponseEntity.ok(referenceList.stream()
                 .map(referenceMapper::toDto)
                 .collect(Collectors.toList()));
